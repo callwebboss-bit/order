@@ -1,0 +1,510 @@
+/* ============================================
+   main.css v3 — Extreme Minimalism 2030
+   יקיר כהן הפקות
+
+   Palette: White / Black / Dark-Red only
+   Layout:  Bento Grid
+   Shadow:  1px borders, no heavy drops
+   ============================================ */
+
+/* ─── Tokens ─────────────────────────────── */
+:root {
+  --c-bg:        #FFFFFF;
+  --c-surface:   #FAFAFA;
+  --c-border:    #E8E8E8;
+  --c-border-md: #D0D0D0;
+  --c-text:      #000000;
+  --c-text-2:    #3A3A3A;
+  --c-text-3:    #7A7A7A;
+  --c-accent:    #8B0000;       /* dark red — accent only */
+  --c-accent-h:  #6B0000;       /* hover */
+  --c-accent-bg: rgba(139,0,0,.06);
+  --c-success:   #1A6B3A;
+  --c-success-bg:rgba(26,107,58,.06);
+
+  --radius:    12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+  --gap:       16px;
+  --gap-lg:    24px;
+
+  --shadow-xs:  0 1px 3px rgba(0,0,0,.05);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,.06);
+
+  --font: 'Heebo', sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --t:    .25s;
+}
+
+/* ─── Reset ───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  direction: rtl;
+  text-align: right;
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Typography ─────────────────────────── */
+h1 { font-size: clamp(2rem,5vw,3.2rem); font-weight: 900; line-height: 1.1; letter-spacing: -.03em; }
+h2 { font-size: clamp(1.5rem,3.5vw,2.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -.02em; }
+h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 10px; }
+h4 { font-size: 1rem;    font-weight: 700; line-height: 1.35; margin-bottom: 8px; }
+
+p { color: var(--c-text-2); line-height: 1.7; }
+
+a { color: var(--c-accent); text-decoration: none; transition: opacity var(--t) var(--ease); }
+a:hover { opacity: .75; }
+
+/* ─── Layout ─────────────────────────────── */
+.yk-section   { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+.yk-container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── Bento Grid ─────────────────────────── */
+.bento {
+  display: grid;
+  gap: var(--gap);
+}
+.bento--2 { grid-template-columns: repeat(2,1fr); }
+.bento--3 { grid-template-columns: repeat(3,1fr); }
+.bento--auto { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
+.bento--auto-lg { grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); }
+
+@media (max-width: 640px) {
+  .bento--2, .bento--3 { grid-template-columns: 1fr; }
+}
+
+/* ─── Bento Cell (base card) ─────────────── */
+.bento-cell {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--t) var(--ease),
+              box-shadow   var(--t) var(--ease),
+              transform    var(--t) var(--ease);
+}
+
+.bento-cell:hover {
+  border-color: var(--c-border-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.bento-cell--surface { background: var(--c-surface); }
+.bento-cell--accent  { border-color: var(--c-accent); }
+
+/* Package cards — clickable, scale on hover */
+.bento-cell--pkg {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.bento-cell--pkg:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--c-accent);
+}
+.bento-cell--pkg.is-popular {
+  border: 2px solid var(--c-accent);
+}
+
+/* ─── Buttons ─────────────────────────────── */
+.yk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--t) var(--ease),
+              transform  var(--t) var(--ease),
+              box-shadow var(--t) var(--ease);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.yk-btn--primary {
+  background: var(--c-accent);
+  color: #fff;
+}
+.yk-btn--primary:hover {
+  background: var(--c-accent-h);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(139,0,0,.25);
+  opacity: 1;
+}
+
+.yk-btn--outline {
+  background: transparent;
+  border: 1.5px solid var(--c-border-md);
+  color: var(--c-text-2);
+}
+.yk-btn--outline:hover {
+  border-color: var(--c-text);
+  color: var(--c-text);
+  opacity: 1;
+}
+
+.yk-btn--ghost {
+  background: transparent;
+  color: var(--c-text-3);
+  padding: 10px 16px;
+}
+.yk-btn--ghost:hover { color: var(--c-text); opacity: 1; }
+
+.yk-btn--block { display: flex; width: 100%; }
+.yk-btn--lg   { padding: 16px 36px; font-size: 1.05rem; }
+.yk-btn--sm   { padding: 9px 18px;  font-size: .85rem; }
+
+/* Add-to-cart success flash */
+.yk-btn--add-success {
+  background: var(--c-success) !important;
+  transform: scale(.97) !important;
+}
+
+/* ─── Badges ─────────────────────────────── */
+.yk-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.yk-badge--accent  { background: var(--c-accent);    color: #fff; }
+.yk-badge--black   { background: var(--c-text);       color: #fff; }
+.yk-badge--border  { background: transparent; border: 1px solid var(--c-border-md); color: var(--c-text-3); }
+.yk-badge--success { background: var(--c-success-bg); color: var(--c-success); }
+
+/* ─── Price Display ───────────────────────── */
+.yk-price-big {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--c-text);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+.yk-price-market {
+  font-size: .82rem;
+  color: var(--c-text-3);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+.yk-price-save {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--c-success);
+}
+
+/* ─── Dividers ───────────────────────────── */
+.yk-divider {
+  border: none;
+  border-top: 1px solid var(--c-border);
+  margin: 24px 0;
+}
+.yk-divider--sm { margin: 14px 0; }
+
+/* ─── Cart — Invisible UI ─────────────────── */
+
+/* Floating counter button (only visible element when cart empty-or-closed) */
+#yk-cart-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 998;
+  display: none; /* shown via JS when items > 0 */
+}
+
+#yk-cart-fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  background: var(--c-text);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+  transition: transform var(--t) var(--ease),
+              box-shadow var(--t) var(--ease);
+}
+#yk-cart-fab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.24);
+}
+
+/* Item count badge on FAB */
+.cart-fab-count {
+  background: var(--c-accent);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  font-weight: 900;
+}
+
+/* ─── Cart Drawer ─────────────────────────── */
+#yk-cart-drawer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--c-bg);
+  border-top: 1px solid var(--c-border);
+  z-index: 997;
+  max-height: 82vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform .4s var(--ease);
+  box-shadow: 0 -4px 32px rgba(0,0,0,.08);
+}
+#yk-cart-drawer.is-open { transform: translateY(0); }
+
+/* ─── Trust Bar (payment icons) ──────────── */
+.trust-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-top: 1px solid var(--c-border);
+}
+
+.trust-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--c-border);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.trust-ssl {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .72rem;
+  color: var(--c-text-3);
+  font-weight: 600;
+}
+
+/* ─── Guarantee Strip ────────────────────── */
+.guarantee-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--c-success-bg);
+  border: 1px solid rgba(26,107,58,.18);
+  border-radius: var(--radius-sm);
+  font-size: .84rem;
+  color: var(--c-success);
+  font-weight: 600;
+}
+
+/* ─── WhatsApp FAB ────────────────────────── */
+.yk-wa-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 54px; height: 54px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 4px 16px rgba(37,211,102,.35);
+  transition: transform var(--t) var(--ease),
+              box-shadow var(--t) var(--ease);
+  text-decoration: none;
+}
+.yk-wa-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(37,211,102,.45);
+  opacity: 1;
+}
+.yk-wa-fab svg { width: 28px; height: 28px; fill: #fff; }
+
+/* ─── Notifications ───────────────────────── */
+.yk-notif {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font);
+  direction: rtl;
+  z-index: 996;
+  max-width: 270px;
+  font-size: .82rem;
+  color: var(--c-text-2);
+  transform: translateX(calc(100% + 32px));
+  opacity: 0;
+  transition: transform .4s var(--ease), opacity .4s ease;
+}
+
+@media (max-width: 480px) {
+  .yk-notif { right: 12px; left: 12px; max-width: none; bottom: 80px; }
+}
+
+/* ─── Exit Intent ─────────────────────────── */
+#yk-exit-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn .3s ease;
+}
+
+.exit-card {
+  background: var(--c-bg);
+  border-radius: var(--radius);
+  padding: 36px 30px;
+  max-width: 420px;
+  width: 92%;
+  font-family: var(--font);
+  direction: rtl;
+  position: relative;
+  animation: slideUp .35s var(--ease);
+}
+
+/* ─── Micro-interactions ─────────────────── */
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes bounceIn{ 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
+@keyframes shake   { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+.yk-animate-in    { animation: slideUp  .5s var(--ease) forwards; }
+.yk-animate-pop   { animation: bounceIn .4s var(--ease) forwards; }
+
+/* ─── Availability Bar ───────────────────── */
+.avail-track {
+  background: var(--c-border);
+  border-radius: 20px; height: 6px; overflow: hidden;
+}
+.avail-fill {
+  height: 100%; border-radius: 20px;
+  background: var(--c-accent);
+  transition: width 1.4s var(--ease);
+}
+
+/* ─── Scarcity Widget ────────────────────── */
+.scarcity-widget {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--c-surface);
+}
+
+/* ─── Guarantee Section ──────────────────── */
+.guarantee-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.guarantee-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: .9rem;
+  color: var(--c-text-2);
+}
+.guarantee-item:last-of-type { border-bottom: none; }
+.guarantee-check {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--c-text);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── Comparison Table ───────────────────── */
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: .9rem;
+  gap: 10px;
+}
+.comp-row:last-child { border-bottom: none; }
+.comp-bad  { color: #888; text-decoration: line-through; }
+.comp-good { color: var(--c-success); font-weight: 700; }
+
+/* ─── Quiz Progress ──────────────────────── */
+.quiz-prog-track { background: var(--c-border); border-radius: 20px; height: 4px; overflow: hidden; margin-bottom: 18px; }
+.quiz-prog-fill  { height: 100%; border-radius: 20px; background: var(--c-text); transition: width .4s ease; }
+
+/* ─── Upsell Cards ───────────────────────── */
+.upsell-card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: border-color var(--t) var(--ease),
+              transform    var(--t) var(--ease),
+              box-shadow   var(--t) var(--ease);
+}
+.upsell-card:hover {
+  border-color: var(--c-text);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Demo Upload ─────────────────────────── */
+.demo-upload-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  background: var(--c-surface);
+}
+
+/* ─── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .yk-section { padding: 40px 16px; }
+  #yk-cart-fab { bottom: 20px; right: 16px; }
+  .yk-wa-fab   { bottom: 20px; left: 16px; }
+}
+
+@media (max-width: 480px) {
+  .yk-btn { padding: 12px 22px; font-size: .9rem; }
+  h3 { font-size: 1.1rem; }
+}
