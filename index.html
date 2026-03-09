@@ -472,42 +472,6 @@
   </section>
 
 
-  <!-- ─── SECTION 7: INTEGRATION GUIDE ─────────────────────── -->
-  <section class="d-section" id="guide" style="margin-bottom:100px;">
-    <div class="d-section__label">הטמעה</div>
-    <h2 class="d-section__heading">איך מחברים את המערכת לאתר שלך</h2>
-    <p class="d-section__desc">למפתחים: דוגמה מלאה להטמעה – CSS, קבצי קונפיג וקריאות Init מסודרות.</p>
-    <!-- config.js חייב להיטען ראשון — שאר המודולים קוראים ממנו -->
-
-    <pre class="d-code">&lt;!-- CSS --&gt;
-&lt;link rel="stylesheet" href="main.css"&gt;
-
-&lt;!-- Config — ראשון! --&gt;
-&lt;script src="config.js"&gt;&lt;/script&gt;
-
-&lt;!-- Modules --&gt;
-&lt;script src="psychology.js"&gt;&lt;/script&gt;
-&lt;script src="pricing.js"&gt;&lt;/script&gt;
-&lt;script src="upsells.js"&gt;&lt;/script&gt;
-&lt;script src="cart.js"&gt;&lt;/script&gt;
-
-&lt;!-- Containers --&gt;
-&lt;div id="availability"&gt;&lt;/div&gt;
-&lt;div id="packages"&gt;&lt;/div&gt;
-&lt;div id="upsells"&gt;&lt;/div&gt;
-
-&lt;!-- Init --&gt;
-&lt;script&gt;
-  YK_Psychology.renderAvailability('availability');
-  YK_Pricing.renderPackageCards('packages');
-  YK_Upsells.renderUpsells('upsells', 'singer');
-  YK_Cart.initCart();
-  YK_Psychology.initExitPopup();
-  YK_Psychology.initLiveNotifications();
-&lt;/script&gt;</pre>
-  </section>
-
-
   <!-- WhatsApp FAB -->
   <a href="https://wa.me/972587555456?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A7%D7%99%D7%A8%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93"
      target="_blank" class="yk-wa-fab" rel="noopener noreferrer" title="WhatsApp">
